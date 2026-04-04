@@ -1,0 +1,16 @@
+{
+	"id": "nisedalatro",
+	"name": "Nisedalatro",
+	"display_name": "Niseda",
+	"author": [
+		"Nebula_Zorua"
+	],
+	"description": "Balatro mod of stupid inside jokes",
+	"prefix": "nest_",
+	"main_file": "main.lua",
+	"priority": 0,
+	"badge_colour": "E39905",
+	"badge_text_colour": "FFFFFF",
+	"version": "0.1",
+	"dependencies": []
+}
