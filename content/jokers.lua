@@ -15,6 +15,10 @@ SMODS.Sound {
 	path = "gargamel_buy.ogg"
 }
 
+SMODS.Sound {
+	key = "nest_gargamel_die",
+	path = "gargasell.ogg"
+}
 
 SMODS.Joker{
 	key ='gargamel',
@@ -43,14 +47,20 @@ SMODS.Joker{
 		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
 	end,
 	calculate = function (self, card, context)
-
 		if context.destroying_card and context.destroy_card:is_suit("Clubs") then
 			return {
 				remove = true
 			}
 		elseif context.individual and not context.blueprint_card and context.cardarea == G.play then
 			if context.other_card:is_suit("Clubs") then
-				card.ability.extra.played_clubs_this_hand = card.ability.extra.played_clubs_this_hand + 1;
+				if context.other_card.ability.extra == nil then
+					context.other_card.ability.extra = {}
+				end
+				if(not context.other_card.ability.extra.garga_got_this_one)then
+					context.other_card.ability.extra.garga_got_this_one = true;
+					card.ability.extra.played_clubs_this_hand = card.ability.extra.played_clubs_this_hand + 1;
+				end
+
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
 					ref_value = "xmult",
@@ -78,6 +88,9 @@ SMODS.Joker{
 	end,
 	add_to_deck = function (self, card, from_debuff)
 		play_sound("nest_gargamel_obtain")
+	end,
+	remove_from_deck =function (self, card, from_debuff)
+		play_sound("nest_gargamel_die")
 	end
 }
 
