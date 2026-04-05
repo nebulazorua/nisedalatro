@@ -1,11 +1,11 @@
-SMODS.Atlas{
+SMODS.Atlas {
 	key = "jokers",
 	path = "Jokers.png",
 	px = 71,
 	py = 95
 }-- Gargamel
 
-SMODS.Sound{
+SMODS.Sound {
 	key = "nest_gargamel_trigger",
 	path = "gargamel_trigger.ogg"
 }
@@ -20,7 +20,7 @@ SMODS.Sound {
 	path = "gargasell.ogg"
 }
 
-SMODS.Joker{
+SMODS.Joker {
 	key ='gargamel',
 	blueprint_compat = true,
 	atlas = "jokers",
