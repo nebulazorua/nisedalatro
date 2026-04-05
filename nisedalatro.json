@@ -6,7 +6,7 @@
 		"Nebula_Zorua"
 	],
 	"description": "Balatro mod of stupid inside jokes",
-	"prefix": "nest_",
+	"prefix": "nest",
 	"main_file": "main.lua",
 	"priority": 0,
 	"badge_colour": "E39905",
