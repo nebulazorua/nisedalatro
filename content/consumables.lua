@@ -3,6 +3,13 @@ SMODS.Sound {
 	path = "cookie_hit.ogg" -- temporary
 }
 
+SMODS.Atlas{
+	key = "consumables",
+	path = "consumables.png",
+	px = 71,
+	py = 95
+}
+
 
 ---@param card? Card|table
 ---@return number
@@ -16,7 +23,8 @@ end
 SMODS.Consumable {
     key = 'fortune_cookie',
     set = 'Tarot',
-    pos = { x = 2, y = 0 },
+    atlas = 'consumables',
+    pos = { x = 0, y = 0 },
     config = { extra = { odds = 30 , mult = 2} },
     loc_vars = function(self, info_queue, card)
 		local numerator, denominator = SMODS.get_probability_vars(card, 1, Nisedalatro.get_cookie_denominator(card), 'nest_fortune_cookie')
