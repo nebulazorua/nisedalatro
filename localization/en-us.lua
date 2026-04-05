@@ -10,6 +10,15 @@ return {
 					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})"
 				}
 			}
+		},
+		Tarot = {
+			c_nest_fortune_cookie = {
+				name = "Fortune Cookie",
+				text = {
+					"{C:green}#1# in #2#{} chance to make you GOATED!",
+					"(Increases all values by {X:mult,C:white}X#3#{})"
+				}
+			}
 		}
 	},
 	misc = {
