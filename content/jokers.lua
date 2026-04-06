@@ -192,6 +192,20 @@ function Nisedalatro.get_all_diamonds(context)
 	return diamonds;
 end
 
+function Nisedalatro.has_aces_and_seven(context)
+	local hasAce = false
+	local hasSeven = false
+	for _, playing_card in ipairs(context.scoring_hand) do
+		if playing_card:get_id() == 11 then
+			hasAce = true
+		elseif playing_card:get_id() == 7 then
+			hasSeven = true
+		end
+	end
+
+	return hasAce and hasSeven;
+end
+
 SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
 	key ='creeper',
 	blueprint_compat = true,
@@ -327,7 +341,8 @@ SMODS.Joker {
 		extra = {
 			mult = 17,
 			odds = 28,
-			cur_mult = 0
+			cur_mult = 0,
+			triggered = false
 		}
 	},
 	loc_vars = function (self, info_queue, card)
@@ -335,7 +350,12 @@ SMODS.Joker {
 		return { vars = { numerator, denominator, card.ability.extra.mult, card.ability.extra.cur_mult} }
 	end,
 	calculate = function (self, card, context)
-		if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 then
+
+		if context.before and Nisedalatro.has_aces_and_seven(context) then
+			card.ability.triggered = true
+		end
+
+		if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 14 or context.other_card:get_id() == 7) and card.ability.triggered then
 
 			if SMODS.pseudorandom_probability(card, 'nest_seven_chips', 1, card.ability.extra.odds) then
 				SMODS.scale_card(card, {
@@ -364,6 +384,7 @@ SMODS.Joker {
 				}
 			end
 		elseif context.joker_main then
+			ability.triggered = false
 			return {
 				mult = card.ability.extra.cur_mult
 			}
