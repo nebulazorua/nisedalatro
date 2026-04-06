@@ -180,18 +180,16 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	end
 }
 
-function Nisedalatro.check_all_cards_diamonds(context)
-	
-	local dCount = 0
-	for _, playing_card in ipairs(G.play.cards) do
+
+function Nisedalatro.get_all_diamonds(context)
+	local diamonds = {}
+	for _, playing_card in ipairs(context.scoring_hand) do
 		if playing_card.base.suit == 'Diamonds' then
-			dCount = dCount + 1
+			table.insert(diamonds, playing_card)
 		end
 	end
 
-	print(dCount)
-	print(#G.play.cards)
-	return dCount == #G.play.cards
+	return diamonds;
 end
 
 SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
@@ -222,7 +220,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 			card.ability.extra.triggered = false;
 			if SMODS.pseudorandom_probability(card, 'nest_creeper', 1, card.ability.extra.odds) then
 				SMODS.destroy_cards(card, nil, nil, true)
-				SMODS.destroy_cards(G.play.cards, nil, nil, true)
+				SMODS.destroy_cards(Nisedalatro.get_all_diamonds(context), nil, nil, true)
 				return {
 					message = localize('k_nest_kaboom')
 				}
@@ -232,7 +230,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 				}
 			end
 		-- Add the mult in main scoring context
-		elseif context.individual and context.cardarea == G.play and Nisedalatro.check_all_cards_diamonds(context) then
+		elseif context.individual and context.cardarea == G.play and #Nisedalatro.get_all_diamonds(context) == #G.play.cards then
 			card.ability.extra.triggered = true;
 			return {
 				xmult = card.ability.extra.xmult
