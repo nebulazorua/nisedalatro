@@ -32,6 +32,91 @@ SMODS.Sound {
 	path = "gargasell3.ogg"
 }
 
+SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toilet or creepare!!!]
+	key ='skibidi_toilet',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0,
+	},
+	config = {
+		extra = {
+			xmult = 2,
+			odds = 25,
+			killed = false
+		}
+	},
+	rarity = 'nest_epic',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	loc_vars = function (self, info_queue, card)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_skibidi_toilet')
+		return { vars = {numerator, denominator,  card.ability.extra.xmult } }
+	end,
+	calculate = function (self, card, context)
+
+		if context.before and next(context.poker_hands['Flush']) then
+			if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
+				card.ability.extra.killed = true
+                SMODS.destroy_cards(card, nil, nil, true)
+				return {
+                    message = localize('k_nest_flushed')
+                }
+			end
+		end
+		-- Add the mult in main scoring context
+		if context.individual and context.cardarea == G.play and card.ability.extra.doScale and next(context.poker_hands['Flush'])
+		and not card.ability.extra.killed then
+			return {
+				xmult = card.ability.extra.xmult
+			}
+		end
+	end
+}
+
+function Nisedalatro.check_all_cards_diamonds(context)
+	
+	local dCount = 1
+	for _, playing_card in ipairs(G.playing_cards) do
+		if playing_card.base.suit == "Diamonds" then
+			dCount = dCount + 1
+		end
+	end
+	print(dCount)
+	print(#G.current_hands)
+	return dCount == #G.playing_cards
+end
+
+SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
+	key ='creeper',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0,
+	},
+	rarity = 'nest_epic',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	config = {
+		extra = {
+			xmult = 2.5,
+			doScale = false,
+			odds = 15
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_creeper')
+		return { vars = {numerator, denominator,  card.ability.extra.xmult } }
+	end,
+	calculate = function (self, card, context)
+		print('unimplemented!')
+	end
+}
+
 SMODS.Joker {
 	key ='gargamel',
 	blueprint_compat = true,
