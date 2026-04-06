@@ -53,11 +53,11 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	discovered = true,
 	loc_vars = function (self, info_queue, card)
 		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_skibidi_toilet')
-		return { vars = {numerator, denominator,  card.ability.extra.xmult } }
+		return { vars = {numerator, denominator,  card.ability.extra.xmult, localize("Flush", "poker_hands") } }
 	end,
 	calculate = function (self, card, context)
 
-		if(next(context.poker_hands['Flush']))then
+		if(context.poker_hands and next(context.poker_hands['Flush']))then
 
 			if context.after and not context.blueprint_card then
 				if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
@@ -111,7 +111,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 	},
 	loc_vars = function (self, info_queue, card)
 		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_creeper')
-		return { vars = {numerator, denominator,  card.ability.extra.xmult } }
+		return { vars = { numerator, denominator, card.ability.extra.xmult, localize("Diamonds", "suits_plural") } }
 	end,
 	calculate = function (self, card, context)
 		print('unimplemented!')
