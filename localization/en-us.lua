@@ -66,11 +66,13 @@ return {
 			k_nest_kaboom = "Kaboom!",
 			k_nest_flushed = "Flushed!",
 			k_nest_epic = "Epic",
-			k_nest_mythic = "Mythic"
+			k_nest_mythic = "Mythic",
+			k_nest_bumper = 'Bumper'
 		},
 		labels = {
 			nest_epic = "Epic",
-			nest_mythic = "Mythic"
+			nest_mythic = "Mythic",
+			nest_bumper = "Bumper"
 		}
 	}
 }
