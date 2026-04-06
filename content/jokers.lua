@@ -16,8 +16,18 @@ SMODS.Sound {
 }
 
 SMODS.Sound {
-	key = "nest_gargamel_die",
-	path = "gargasell.ogg"
+	key = "nest_gargamel_die1",
+	path = "gargasell1.ogg"
+}
+
+SMODS.Sound {
+	key = "nest_gargamel_die2",
+	path = "gargasell2.ogg"
+}
+
+SMODS.Sound {
+	key = "nest_gargamel_die3",
+	path = "gargasell3.ogg"
 }
 
 SMODS.Joker {
@@ -90,7 +100,7 @@ SMODS.Joker {
 		play_sound("nest_gargamel_obtain")
 	end,
 	remove_from_deck =function (self, card, from_debuff)
-		play_sound("nest_gargamel_die")
+		play_sound("nest_gargamel_die" .. pseudorandom("nest_gargasell", 1, 3))
 	end
 }
 
