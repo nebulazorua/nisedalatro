@@ -59,7 +59,7 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 
 		if(next(context.poker_hands['Flush']))then
 
-			if context.before and not context.blueprint_card then
+			if context.after and not context.blueprint_card then
 				if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
 					card.ability.extra.killed = true
 					SMODS.destroy_cards(card, nil, nil, true)
