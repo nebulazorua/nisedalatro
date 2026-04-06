@@ -1,6 +1,5 @@
 if not JokerDisplay then return end
 
-
 JokerDisplay.Definitions.j_nest_gargamel = {
 	text = {
 		{

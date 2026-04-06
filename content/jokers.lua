@@ -3,7 +3,9 @@ SMODS.Atlas {
 	path = "Jokers.png",
 	px = 71,
 	py = 95
-}-- Gargamel
+}
+
+-- Gargamel
 
 SMODS.Sound {
 	key = "nest_gargamel_trigger",
@@ -24,7 +26,7 @@ SMODS.Sound {
 	key = "nest_gargamel_die2",
 	path = "gargasell2.ogg"
 }
-
+	
 SMODS.Sound {
 	key = "nest_gargamel_die3",
 	path = "gargasell3.ogg"
@@ -44,8 +46,8 @@ SMODS.Joker {
 	},
 	rarity = 3,
 	cost = 6,
-	unlocked = true,
-	discovered = true,
+	unlocked = false,
+	discovered = false,
 	config = {
 		extra = {
 			xmult = 1,
@@ -53,21 +55,22 @@ SMODS.Joker {
 			played_clubs_this_hand = 0 -- for displaying funny message
 		}
 	},
+	locked_loc_vars = function(self, info_queue, card)
+        return { vars = { 10, localize("Clubs", "suits_singular") } }
+    end,
+
 	loc_vars = function (self, info_queue, card)
 		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
 	end,
 	calculate = function (self, card, context)
-		if context.destroying_card and context.destroy_card:is_suit("Clubs") then
+		if context.destroying_card and context.destroy_card:is_suit("Clubs") and not context.retrigger_joker then
 			return {
 				remove = true
 			}
 		elseif context.individual and not context.blueprint_card and context.cardarea == G.play then
 			if context.other_card:is_suit("Clubs") then
-				if context.other_card.ability.extra == nil then
-					context.other_card.ability.extra = {}
-				end
-				if(not context.other_card.ability.extra.garga_got_this_one)then
-					context.other_card.ability.extra.garga_got_this_one = true;
+				if(not context.other_card.ability.garga_got_this_one)then
+					context.other_card.ability.garga_got_this_one = true;
 					card.ability.extra.played_clubs_this_hand = card.ability.extra.played_clubs_this_hand + 1;
 				end
 
@@ -85,13 +88,15 @@ SMODS.Joker {
 				}
 			end
 		elseif context.joker_main then
+			local retrigger = context.retrigger_joker or context.blueprint_card
 			return {
 				xmult = card.ability.extra.xmult,
 				delay = 0.4,
 				func = card.ability.extra.played_clubs_this_hand > 0 and function ()
 					card.ability.extra.played_clubs_this_hand = 0;
-					card_eval_status_text(card, 'extra', nil, nil, nil,
-					{ message = localize("k_nest_gargamel"), sound = "nest_gargamel_trigger" })
+					if not retrigger then
+						card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize("k_nest_gargamel"), sound = "nest_gargamel_trigger" })
+					end
 				end or nil
 			}
 		end
@@ -101,6 +106,15 @@ SMODS.Joker {
 	end,
 	remove_from_deck =function (self, card, from_debuff)
 		play_sound("nest_gargamel_die" .. pseudorandom("nest_gargasell", 1, 3))
+	end,
+	check_for_unlock = function (self, args)
+		if args.type == 'card_destroyed' then
+			if args.card:is_suit("Clubs")then
+				G.GAME.DESTROYED_CLUBS = (G.GAME.DESTROYED_CLUBS or 0) + 1;
+				return G.GAME.DESTROYED_CLUBS >= 10
+			end
+		end
+		return false;
 	end
 }
 
