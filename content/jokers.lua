@@ -37,7 +37,7 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 2,
+		x = 3,
 		y = 0,
 	},
 	config = {
@@ -58,7 +58,7 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	calculate = function (self, card, context)
 		if context.after and not context.blueprint_card and card.ability.extra.triggered then
 			card.ability.extra.triggered = false;
-			if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
+			if SMODS.pseudorandom_probability(card, 'nest_skibidi_toilet', 1, card.ability.extra.odds) then
 				SMODS.destroy_cards(card, nil, nil, true)
 				return {
 					message = localize('k_nest_flushed')
@@ -93,15 +93,16 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 
 function Nisedalatro.check_all_cards_diamonds(context)
 	
-	local dCount = 1
-	for _, playing_card in ipairs(G.playing_cards) do
-		if playing_card.base.suit == "Diamonds" then
+	local dCount = 0
+	for _, playing_card in ipairs(G.play.cards) do
+		if playing_card.base.suit == 'Diamonds' then
 			dCount = dCount + 1
 		end
 	end
+
 	print(dCount)
-	print(#G.current_hands)
-	return dCount == #G.playing_cards
+	print(#G.play.cards)
+	return dCount == #G.play.cards
 end
 
 SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
@@ -109,7 +110,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 2,
+		x = 4,
 		y = 0,
 	},
 	rarity = 'nest_epic',
@@ -119,7 +120,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 	config = {
 		extra = {
 			xmult = 2.5,
-			doScale = false,
+			triggered = false,
 			odds = 20
 		}
 	},
@@ -128,7 +129,26 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 		return { vars = { numerator, denominator, card.ability.extra.xmult, localize("Diamonds", "suits_plural") } }
 	end,
 	calculate = function (self, card, context)
-
+		if context.after and not context.blueprint_card and card.ability.extra.triggered then
+			card.ability.extra.triggered = false;
+			if SMODS.pseudorandom_probability(card, 'nest_creeper', 1, card.ability.extra.odds) then
+				SMODS.destroy_cards(card, nil, nil, true)
+				SMODS.destroy_cards(G.play.cards, nil, nil, true)
+				return {
+					message = localize('k_nest_kaboom')
+				}
+			else
+				return {
+					message = localize("k_safe_ex")
+				}
+			end
+		-- Add the mult in main scoring context
+		elseif context.individual and context.cardarea == G.play and Nisedalatro.check_all_cards_diamonds(context) then
+			card.ability.extra.triggered = true;
+			return {
+				xmult = card.ability.extra.xmult
+			}
+		end
 	end,
 	add_to_deck = function(self, card, from_debuff)
 		--- @type SMODS.Joker
