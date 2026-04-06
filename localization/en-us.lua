@@ -46,6 +46,23 @@ return {
 					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
+			},
+			j_nest_seven_chips = {
+				name = "7chips",
+				text = {
+					"Gains #3# chips per 7 played.",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Chips instead!",
+					"{C:inactive}(Currently #4# chips){C:inactive}"
+				}
+			},
+			j_nest_seveteen_chips = {
+				name = "17chips",
+				text = {
+					"Gains #3# mult per Ace and 7 played,",
+					"ONLY when a both are played and scoring.",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Mult instead!",
+					"{C:inactive}(Currently #4# mult){C:inactive}"
+				}
 			}
 		},
 		Tarot = {
@@ -68,6 +85,8 @@ return {
 			k_nest_epic = "Epic",
 			k_nest_mythic = "Mythic",
 			k_nest_bumper = 'Bumper',
+			k_nest_sovl = 'Sovl!',
+			k_nest_susovl = 'SuperSovl!',
 			k_nest_horrid = 'Horrid'
 		},
 		labels = {
