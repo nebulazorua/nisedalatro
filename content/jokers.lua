@@ -67,7 +67,7 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 			end
 		end
 		-- Add the mult in main scoring context
-		if context.individual and context.cardarea == G.play and card.ability.extra.doScale and next(context.poker_hands['Flush'])
+		if context.individual and context.cardarea == G.play and next(context.poker_hands['Flush'])
 		and not card.ability.extra.killed then
 			return {
 				xmult = card.ability.extra.xmult
