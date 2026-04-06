@@ -43,8 +43,8 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	config = {
 		extra = {
 			xmult = 2,
-			odds = 25,
-			killed = false
+			odds = 30,
+			triggered = false,
 		}
 	},
 	rarity = 'nest_epic',
@@ -56,24 +56,38 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 		return { vars = {numerator, denominator,  card.ability.extra.xmult, localize("Flush", "poker_hands") } }
 	end,
 	calculate = function (self, card, context)
-
-		if(context.poker_hands and next(context.poker_hands['Flush']))then
-
-			if context.after and not context.blueprint_card then
-				if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
-					card.ability.extra.killed = true
-					SMODS.destroy_cards(card, nil, nil, true)
-					return {
-						message = localize('k_nest_flushed')
-					}
-				end
-			-- Add the mult in main scoring context
-			elseif context.individual and context.cardarea == G.play and not card.ability.extra.killed then
+		if context.after and not context.blueprint_card and card.ability.extra.triggered then
+			card.ability.extra.triggered = false;
+			if SMODS.pseudorandom_probability(card, 'next_skibidi_toilet', 1, card.ability.extra.odds) then
+				SMODS.destroy_cards(card, nil, nil, true)
 				return {
-					xmult = card.ability.extra.xmult
+					message = localize('k_nest_flushed')
+				}
+			else
+				return {
+					message = localize("k_safe_ex")
 				}
 			end
+		-- Add the mult in main scoring context
+		elseif context.individual and context.cardarea == G.play and next(context.poker_hands['Flush']) then
+			card.ability.extra.triggered = true;
+			return {
+				xmult = card.ability.extra.xmult
+			}
 		end
+		
+	end,
+	add_to_deck = function (self, card, from_debuff)
+		--- @type SMODS.Joker
+		local creeper = SMODS.find_card("j_nest_creeper", true)[1]; 
+		if creeper then
+			SMODS.destroy_cards(creeper);
+			SMODS.destroy_cards(card);
+			G.GAME.SKIBIDI_GREED = true
+		end
+	end,
+	in_pool = function (self, args)
+		return not G.GAME.SKIBIDI_GREED
 	end
 }
 
@@ -106,7 +120,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 		extra = {
 			xmult = 2.5,
 			doScale = false,
-			odds = 15
+			odds = 20
 		}
 	},
 	loc_vars = function (self, info_queue, card)
@@ -114,7 +128,19 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 		return { vars = { numerator, denominator, card.ability.extra.xmult, localize("Diamonds", "suits_plural") } }
 	end,
 	calculate = function (self, card, context)
-		print('unimplemented!')
+
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		--- @type SMODS.Joker
+		local toilet = SMODS.find_card("j_nest_skibidi_toilet", true)[1];
+		if toilet then
+			SMODS.destroy_cards(toilet);
+			SMODS.destroy_cards(card);
+			G.GAME.SKIBIDI_GREED = true
+		end
+	end,
+	in_pool = function(self, args)
+		return not G.GAME.SKIBIDI_GREED
 	end
 }
 

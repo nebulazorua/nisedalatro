@@ -33,7 +33,7 @@ return {
 				text = {
 					"If current hand contains a {C:attention}#4#{}",
 					"apply {X:mult,C:white}X#3#{} Mult per card played.",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to flush itself!){}",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to flush itself){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
 			},
@@ -42,7 +42,8 @@ return {
 				text = {
 					"If current hand contains only {C:diamonds}#4#{}",
 					"apply {X:mult,C:white}X#3#{} Mult per card played.",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to explode the Diamond cards in your hand and itself!){}",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to explode",
+					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
 			}
