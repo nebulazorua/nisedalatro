@@ -30,6 +30,52 @@ SMODS.Sound {
 	path = "gargasell3.ogg"
 }
 
+SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toilet or creepare!!!]
+	key ='skibidi_toilet',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0,
+	},
+	config = {
+		extra = {
+			xmult = 2
+		}
+	},
+	rarity = 'nest_epic',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	loc_vars = function (self, info_queue, card)
+		return { vars = { card.ability.extra.xmult } }
+	end,
+}
+
+SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
+	key ='creeper',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0,
+	},
+	rarity = 'nest_epic',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	config = {
+		extra = {
+			xmult = 2.5,
+			odds = 15
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, odds, 'nest_fortune_cookie')
+		return { vars = {numerator, denominator,  card.ability.extra.xmult } }
+	end,
+}
+
 SMODS.Joker {
 	key ='gargamel',
 	blueprint_compat = true,
