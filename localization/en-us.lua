@@ -67,12 +67,14 @@ return {
 			k_nest_flushed = "Flushed!",
 			k_nest_epic = "Epic",
 			k_nest_mythic = "Mythic",
-			k_nest_bumper = 'Bumper'
+			k_nest_bumper = 'Bumper',
+			k_nest_horrid = 'Horrid'
 		},
 		labels = {
 			nest_epic = "Epic",
 			nest_mythic = "Mythic",
-			nest_bumper = "Bumper"
+			nest_bumper = "Bumper",
+			nest_horrid = "Horrid"
 		}
 	}
 }

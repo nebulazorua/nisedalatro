@@ -27,6 +27,14 @@ local function load_file(file)
 	end
 end
 
+SMODS.Rarity {
+	key = 'horrid',
+	badge_colour = HEX '000000',
+	pools = { ["Joker"] = true },
+	default_weight = 0
+}
+
+
 load_file("misc/overrides.lua")
 load_file("content/consumables.lua")
 load_file("content/jokers.lua") -- Load all the Nisedalatro jokers
