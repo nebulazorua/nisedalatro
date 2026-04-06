@@ -31,17 +31,19 @@ return {
 			j_nest_skibidi_toilet = {
 				name = "Skibidi Toilet",
 				text = {
-					"If current hand contains a Flush, apply {X:mult,C:white}X#3#{} Mult per card played.",
+					"If current hand contains a Flush",
+					"apply {X:mult,C:white}X#3#{} Mult per card played.",
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to flush itself!){}",
-					"{C:rainbow}skibidi toilet or creeper!{}"
+					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
 			},
 			j_nest_creeper = {
 				name = "Creeper",
 				text = {
-					"If current hand contains only Diamonds, apply {X:mult,C:white}X#3#{} Mult per card played.",
+					"If current hand contains only Diamonds",
+					"apply {X:mult,C:white}X#3#{} Mult per card played.",
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to explode the Diamond cards in your hand and itself!){}",
-					"{C:rainbow}skibidi toilet or creeper!{}"
+					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
 			}
 		},
