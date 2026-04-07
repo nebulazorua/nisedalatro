@@ -68,7 +68,7 @@ return {
 				}
 			},
 			j_nest_seventeen_mult = {
-				name = "17chips",
+				name = "17mult",
 				text = {
 					"Gains {C:mult}+#3#{} Mult per Ace and 7 played,",
 					"ONLY when a both are played and scoring.",
