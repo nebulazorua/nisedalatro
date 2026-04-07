@@ -46,7 +46,7 @@ return {
 					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				},
-			}
+			},
 			j_nest_red = {
 				name = "Red",
 				text = {
