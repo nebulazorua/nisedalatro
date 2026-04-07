@@ -62,7 +62,7 @@ return {
 			j_nest_seven_chips = {
 				name = "7chips",
 				text = {
-					"Gains #3# chips per 7 played.",
+					"Gains {C:chips}+#3#{} Chips per 7 played.",
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Chips instead!",
 					"{C:inactive}(Currently #4# chips){C:inactive}"
 				}
@@ -70,7 +70,7 @@ return {
 			j_nest_seventeen_mult = {
 				name = "17chips",
 				text = {
-					"Gains #3# mult per Ace and 7 played,",
+					"Gains {C:mult}+#3#{} Mult per Ace and 7 played,",
 					"ONLY when a both are played and scoring.",
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Mult instead!",
 					"{C:inactive}(Currently #4# mult){C:inactive}"
