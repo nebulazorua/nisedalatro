@@ -34,6 +34,7 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
 		local goated = SMODS.pseudorandom_probability(card, "nest_fortune_cookie", 1, Nisedalatro.get_cookie_denominator(card))
 		if goated then
+			check_for_unlock{type = 'goated'}
 			play_sound("nest_goated_cookie")
 			G.GAME.COOKIES = (G.GAME.COOKIES or 0) + 1;
 			for _, item in next, G.jokers.cards do

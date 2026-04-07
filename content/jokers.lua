@@ -144,6 +144,36 @@ SMODS.Joker {
 	end
 }
 
+
+-- Goated shirt
+SMODS.Joker {
+	key = "goated",
+	blueprint_compat = false,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0
+	},
+	rarity = 2,
+	cost = 5,
+	unlocked = false,
+	discovered = false,
+	loc_vars = function (self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS["c_nest_fortune_cookie"]
+		return {}
+	end,
+	calculate = function (self, card, context)
+		if context.mod_probability and not context.blueprint_card and context.identifier == 'nest_fortune_cookie' then
+			return {
+				denominator = math.max(context.denominator - 15, 1),
+			}
+		end
+	end,
+	check_for_unlock = function (self, args)
+		return args.type == 'goated'
+	end
+}
+
 -- Skibidi Toilet and Creeper
 
 SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toilet or creepare!!!]

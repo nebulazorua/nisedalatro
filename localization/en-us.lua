@@ -23,6 +23,18 @@ return {
 					"{C:inactive}(ex: {C:green}1 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
 				}
 			},
+			j_nest_goated = {
+				name = "Goated Shirt",
+				text = {
+					"Increases the {C:green,E:1,S:1.1}probability{}",
+					"of {c:attention}Fortune Cookie{} hitting."
+				},
+				unlock = {
+					"Successfully be deemed",
+					"{C:attention}GOATED{}",
+					"By a Fortune Cookie"
+				}
+			},
 			j_nest_recursion = {
 				name = "Recursion",
 				text = {
