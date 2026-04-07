@@ -67,7 +67,7 @@ return {
 					"{C:inactive}(Currently #4# chips){C:inactive}"
 				}
 			},
-			j_nest_seveteen_chips = {
+			j_nest_seventeen_mult = {
 				name = "17chips",
 				text = {
 					"Gains #3# mult per Ace and 7 played,",
