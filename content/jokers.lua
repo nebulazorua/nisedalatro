@@ -103,9 +103,12 @@ SMODS.Joker {
 		end
 	end,
 	add_to_deck = function(self, card, from_debuff)
-		play_sound("nest_gargamel_obtain")
+		if not from_debuff then 
+			play_sound("nest_gargamel_obtain")
+		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
+		-- dont add from_debuff check its funnier like this
 		play_sound("nest_gargamel_die" .. pseudorandom("nest_gargasell", 1, 3))
 	end,
 	check_for_unlock = function(self, args)
@@ -180,11 +183,14 @@ SMODS.Joker { -- Skibidi Toilet, cannot be bought alongside Creeper [skibidi toi
 	end
 }
 
+--- @param context CalcContext
+--- @return table
+--- Returns a table of all diamonds in the scoring hand based on context
 
-function Nisedalatro.get_all_diamonds(context)
+local function get_all_diamonds(context)
 	local diamonds = {}
 	for _, playing_card in ipairs(context.scoring_hand) do
-		if playing_card.base.suit == 'Diamonds' then
+		if playing_card:is_suit("Diamonds", true) then
 			table.insert(diamonds, playing_card)
 		end
 	end
@@ -220,7 +226,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 			card.ability.extra.triggered = false;
 			if SMODS.pseudorandom_probability(card, 'nest_creeper', 1, card.ability.extra.odds) then
 				SMODS.destroy_cards(card, nil, nil, true)
-				SMODS.destroy_cards(Nisedalatro.get_all_diamonds(context), nil, nil, true)
+				SMODS.destroy_cards(get_all_diamonds(context), nil, nil, true)
 				return {
 					message = localize('k_nest_kaboom')
 				}
@@ -230,7 +236,7 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 				}
 			end
 		-- Add the mult in main scoring context
-		elseif context.individual and context.cardarea == G.play and #Nisedalatro.get_all_diamonds(context) == #G.play.cards then
+		elseif context.individual and context.cardarea == G.play and #get_all_diamonds(context) == #G.play.cards then
 			card.ability.extra.triggered = true;
 			return {
 				xmult = card.ability.extra.xmult

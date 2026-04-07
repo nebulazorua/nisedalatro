@@ -25,13 +25,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		local ret = {vars = { card.ability.extra.copies, card.ability.extra.copies ~= 1 and "s" or "" }};
         if card.area and card.area == G.jokers then
-			local my_pos = nil
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i] == card then
-					my_pos = i
-					break
-				end
-			end
+			local my_pos = Nisedalatro.get_joker_index(card);
 
 			local left_joker = G.jokers.cards[my_pos - 1];
 			local right_joker = G.jokers.cards[my_pos + 1];
@@ -69,13 +63,7 @@ SMODS.Joker {
 
 	calculate = function (self, card, context)
 		if not context.blueprint_card then
-			local my_pos = nil
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i] == card then
-					my_pos = i
-					break
-				end
-			end
+			local my_pos = Nisedalatro.get_joker_index(card);
 
 			local effects = {}
 

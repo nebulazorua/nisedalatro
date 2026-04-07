@@ -46,6 +46,18 @@ return {
 					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
+			},
+			j_nest_red = {
+				name = "Red",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"{C:red}Consumes{} {C:attention}Joker{} to the right",
+					"and permenantly add {X:mult,C:white}XMult{}",
+					"based on it's rarity.",
+
+					"{C:inactive}({C:red}Consumed{C:inactive} cards will not reappear!)",
+					"{C:inactive}(Currently at {X:mult,C:white}X#2#{C:inactive}, will give {X:mult,C:white}X#1#{C:inactive})",
+				}
 			}
 		},
 		Tarot = {
@@ -66,13 +78,11 @@ return {
 			k_nest_kaboom = "Kaboom!",
 			k_nest_flushed = "Flushed!",
 			k_nest_epic = "Epic",
-			k_nest_mythic = "Mythic",
-			k_nest_bumper = 'Bumper'
+			k_nest_mythic = "Mythic"
 		},
 		labels = {
 			nest_epic = "Epic",
-			nest_mythic = "Mythic",
-			nest_bumper = "Bumper"
+			nest_mythic = "Mythic"
 		}
 	}
 }

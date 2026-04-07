@@ -11,3 +11,18 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
 	check_for_unlock({ type = 'card_destroyed', card = self })
 	return CardDissolve(self, dissolve_colours, silent, dissolve_time_fac, no_juice);
 end
+
+
+local AddToPool = SMODS.add_to_pool;
+
+function SMODS.add_to_pool(prototype_obj, args)
+	local reds = SMODS.find_card("j_nest_red");
+	if #reds > 0 then
+		for _, red in next, reds do
+			if(red.ability.extra.personally_consumed[prototype_obj.key])then
+				return false;
+			end
+		end
+	end
+	return AddToPool(prototype_obj, args)
+end
