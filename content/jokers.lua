@@ -202,7 +202,7 @@ function Nisedalatro.has_aces_and_seven(context)
 	local hasAce = false
 	local hasSeven = false
 	for _, playing_card in ipairs(context.scoring_hand) do
-		if playing_card:get_id() == 11 then
+		if playing_card:get_id() == 14 then
 			hasAce = true
 		elseif playing_card:get_id() == 7 then
 			hasSeven = true
@@ -390,7 +390,7 @@ SMODS.Joker {
 				}
 			end
 		elseif context.joker_main then
-			ability.triggered = false
+			card.ability.extra.triggered = false
 			return {
 				mult = card.ability.extra.cur_mult
 			}
