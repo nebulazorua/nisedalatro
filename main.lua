@@ -31,7 +31,7 @@ SMODS.Rarity {
 	key = 'horrid',
 	badge_colour = HEX '000000',
 	pools = { ["Joker"] = true },
-	default_weight = 0
+	default_weight = 0.015
 }
 
 
