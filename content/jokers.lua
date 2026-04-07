@@ -198,6 +198,20 @@ local function get_all_diamonds(context)
 	return diamonds;
 end
 
+function Nisedalatro.has_aces_and_seven(context)
+	local hasAce = false
+	local hasSeven = false
+	for _, playing_card in ipairs(context.scoring_hand) do
+		if playing_card:get_id() == 11 then
+			hasAce = true
+		elseif playing_card:get_id() == 7 then
+			hasSeven = true
+		end
+	end
+
+	return hasAce and hasSeven;
+end
+
 SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toilet or creepare!!!]
 	key ='creeper',
 	blueprint_compat = true,
@@ -254,5 +268,132 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 	end,
 	in_pool = function(self, args)
 		return not G.GAME.SKIBIDI_GREED
+	end
+}
+
+SMODS.Joker {
+	key ='seven_chips',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 5,
+		y = 0,
+	},
+	rarity = 'nest_horrid',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	config = {
+		extra = {
+			chips = 7,
+			odds = 14,
+			cur_chips = 0
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_seven_chips')
+		return { vars = { numerator, denominator, card.ability.extra.chips, card.ability.extra.cur_chips} }
+	end,
+	calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 then
+
+			if SMODS.pseudorandom_probability(card, 'nest_seven_chips', 1, card.ability.extra.odds) then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "cur_chips",
+					scalar_value = "chips",
+					no_message = true,
+					operation = 'X'
+				})
+				return {
+					message = localize("k_nest_susovl"),
+					message_card = card,
+					colour = G.C.CHIPS
+				}
+			else
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "cur_chips",
+					scalar_value = "chips",
+					no_message = true
+				})
+				return {
+					message = localize("k_nest_sovl"),
+					message_card = card,
+					colour = G.C.CHIPS
+				}
+			end
+		elseif context.joker_main then
+			return {
+				chips = card.ability.extra.cur_chips
+			}
+		end
+	end
+}
+
+SMODS.Joker {
+	key ='seventeen_mult',
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 6,
+		y = 0,
+	},
+	rarity = 'nest_horrid',
+	cost = 10,
+	unlocked = true,
+	discovered = true,
+	config = {
+		extra = {
+			mult = 17,
+			odds = 28,
+			cur_mult = 0,
+			triggered = false
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'nest_seventeen_mult')
+		return { vars = { numerator, denominator, card.ability.extra.mult, card.ability.extra.cur_mult} }
+	end,
+	calculate = function (self, card, context)
+
+		if context.before and Nisedalatro.has_aces_and_seven(context) then
+			card.ability.triggered = true
+		end
+
+		if context.individual and context.cardarea == G.play and (context.other_card:get_id() == 14 or context.other_card:get_id() == 7) and card.ability.triggered then
+
+			if SMODS.pseudorandom_probability(card, 'nest_seven_chips', 1, card.ability.extra.odds) then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "cur_mult",
+					scalar_value = "mult",
+					no_message = true,
+					operation = 'X'
+				})
+				return {
+					message = localize("k_nest_susovl"),
+					message_card = card,
+					colour = G.C.MULT
+				}
+			else
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "cur_mult",
+					scalar_value = "mult",
+					no_message = true
+				})
+				return {
+					message = localize("k_nest_sovl"),
+					message_card = card,
+					colour = G.C.MULT
+				}
+			end
+		elseif context.joker_main then
+			ability.triggered = false
+			return {
+				mult = card.ability.extra.cur_mult
+			}
+		end
 	end
 }
