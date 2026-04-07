@@ -8,7 +8,15 @@ JokerDisplay.Definitions.j_nest_gargamel = { -- Gargamel
 				{ ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" },
 			}
 		}
-	}
+	},
+	reminder_text = {
+		{ text = "(" },
+		{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.SUITS.Clubs },
+		{ text = ")" },
+	},
+	calc_function = function(card)
+		card.joker_display_values.localized_text = localize("Clubs", 'suits_plural')
+	end
 }
 
 JokerDisplay.Definitions.j_nest_red = { -- Red
@@ -87,7 +95,7 @@ JokerDisplay.Definitions.j_nest_creeper = { -- Creeper
 	},
 	reminder_text = {
 		{ text = "(" },
-		{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.DIAMONDS },
+		{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.SUITS.Diamonds },
 		{ text = ")" },
 	},
 	calc_function = function(card)
