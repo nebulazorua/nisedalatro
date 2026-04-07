@@ -63,7 +63,7 @@ return {
 				name = "7chips",
 				text = {
 					"Gains {C:chips}+#3#{} Chips per {C:attention}7{} scored.",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Chips instead!",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} {C:chips}Chips{} {C:inactive}instead!",
 					"{C:inactive}(Currently #4# Chips){C:inactive}"
 				}
 			},
@@ -71,7 +71,7 @@ return {
 				name = "17mult",
 				text = {
 					"Gains {C:mult}+#3#{} Mult per {C:attention}Ace{} and {C:attention}7{} scored together,",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:mult,C:white}X#5#{} Mult instead!",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:mult,C:white}X#5#{} {C:mult}Mult{} {C:inactive}instead!",
 					"{C:inactive}(Currently #4# Mult){C:inactive}"
 				}
 			}
