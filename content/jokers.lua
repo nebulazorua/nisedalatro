@@ -282,7 +282,7 @@ SMODS.Joker {
 		return { vars = { numerator, denominator, card.ability.extra.chips, card.ability.extra.cur_chips} }
 	end,
 	calculate = function (self, card, context)
-		if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 then
+		if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 and not context.blueprint_card then
 
 			if SMODS.pseudorandom_probability(card, 'nest_seven_chips', 1, card.ability.extra.odds) then
 				SMODS.scale_card(card, {
@@ -346,7 +346,7 @@ SMODS.Joker {
 		return { vars = { numerator, denominator, card.ability.extra.mult, card.ability.extra.cur_mult, card.ability.extra.xmult } }
 	end,
 	calculate = function (self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if context.individual and context.cardarea == G.play and not context.blueprint_card then
 			if context.other_card:get_id() == 14 then
 				card.ability.extra.sevens = card.ability.extra.sevens + 1;
 			elseif context.other_card:get_id() == 7 then
