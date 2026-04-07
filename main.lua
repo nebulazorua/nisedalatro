@@ -4,7 +4,7 @@ Nisedalatro.mod = SMODS.current_mod;
 SMODS.Rarity {
 	key = "epic",
 	badge_colour = HEX('FF00FF'),
-	default_weight = 0.015,
+	default_weight = 0.005,
 	get_weight = function(self, weight, object_type)
 		return weight
 	end,
@@ -58,11 +58,14 @@ local function load_file(file)
 	end
 end
 
+
+-- TODO: Make bumper cards & brap radio bumper for horrids to appear from
+-- ALSO: figure out a new name for brap radio since its stupid and we dont want that in a public release
 SMODS.Rarity {
 	key = 'horrid',
 	badge_colour = HEX '000000',
 	pools = { ["Joker"] = true },
-	default_weight = 0.015
+	default_weight = 0.005
 }
 
 

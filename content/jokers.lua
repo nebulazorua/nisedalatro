@@ -45,7 +45,7 @@ SMODS.Joker {
 		y = 0
 	},
 	rarity = 3,
-	cost = 6,
+	cost = 7,
 	unlocked = false,
 	discovered = false,
 	config = {
@@ -119,6 +119,28 @@ SMODS.Joker {
 			end
 		end
 		return false;
+	end
+}
+
+-- Nothing. Ever. Happens.
+SMODS.Joker {
+	key = "chud",
+	blueprint_compat = false,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0
+	},
+	rarity = 3,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	calculate = function (self, card, context)
+		if context.mod_probability and not context.blueprint_card then
+			return {
+				numerator = 0
+			}
+		end
 	end
 }
 

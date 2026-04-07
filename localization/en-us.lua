@@ -15,6 +15,14 @@ return {
 					"suit in one run."
 				}
 			},
+			j_nest_chud = {
+				name = "Nothing Ever Happens",
+				text = {
+					"Reduces all {C:attention}listed",
+					"{C:green,E:1,S:1.1}probabilities{} to 0",
+					"{C:inactive}(ex: {C:green}1 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
+				}
+			},
 			j_nest_recursion = {
 				name = "Recursion",
 				text = {
@@ -32,7 +40,7 @@ return {
 				name = "Skibidi Toilet",
 				text = {
 					"If current hand contains a {C:attention}#4#{}",
-					"apply {X:mult,C:white}X#3#{} Mult per card played.",
+					"each scored card gives {X:mult,C:white}X#3#{} Mult.",
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to flush itself){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				}
@@ -63,7 +71,7 @@ return {
 				name = "7chips",
 				text = {
 					"Gains {C:chips}+#3#{} Chips per {C:attention}7{} scored.",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} {C:chips}Chips{} {C:inactive}instead!",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} {C:inactive}Chips instead!",
 					"{C:inactive}(Currently #4# Chips){C:inactive}"
 				}
 			},
@@ -71,7 +79,7 @@ return {
 				name = "17mult",
 				text = {
 					"Gains {C:mult}+#3#{} Mult per {C:attention}Ace{} and {C:attention}7{} scored together,",
-					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:mult,C:white}X#5#{} {C:mult}Mult{} {C:inactive}instead!",
+					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:mult,C:white}X#5#{} {C:inactive}Mult instead!",
 					"{C:inactive}(Currently #4# Mult){C:inactive}"
 				}
 			}
