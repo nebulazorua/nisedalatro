@@ -136,7 +136,7 @@ SMODS.Joker {
 	unlocked = true,
 	discovered = false,
 	calculate = function (self, card, context)
-		if context.mod_probability and not context.blueprint_card then
+		if context.fix_probability and not context.blueprint_card then
 			return {
 				numerator = 0
 			}
