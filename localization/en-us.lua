@@ -58,7 +58,7 @@ return {
 					"{C:inactive}(Currently at {X:mult,C:white}X#2#{C:inactive}, will give {X:mult,C:white}X#1#{C:inactive})",
 				}
 			},
-						j_nest_seven_chips = {
+			j_nest_seven_chips = {
 				name = "7chips",
 				text = {
 					"Gains #3# chips per 7 played.",
@@ -74,6 +74,7 @@ return {
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to gain {X:chips,C:white}X#3#{} Mult instead!",
 					"{C:inactive}(Currently #4# mult){C:inactive}"
 				}
+			}
 		},
 		Tarot = {
 			c_nest_fortune_cookie = {
