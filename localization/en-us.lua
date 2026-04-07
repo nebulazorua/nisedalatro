@@ -46,6 +46,7 @@ return {
 					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
 				},
+			}
 			j_nest_red = {
 				name = "Red",
 				text = {
@@ -99,7 +100,6 @@ return {
 			k_nest_sovl = 'Sovl!',
 			k_nest_susovl = 'SuperSovl!',
 			k_nest_horrid = 'Horrid'
-		},
 		},
 		labels = {
 			nest_epic = "Epic",
