@@ -50,6 +50,18 @@ JokerDisplay.Definitions.j_nest_red = { -- Red
 	end
 }
 
+-- Ghost Wolf
+JokerDisplay.Definitions.j_nest_hot_dog = {
+	text = {
+		{
+			border_nodes = {
+				{ text = "X" },
+				{ ref_table = "card.ability.extra", ref_value = "xmult", retrigger_type = "exp" }
+			}
+		}
+	}
+}
+
 
 JokerDisplay.Definitions.j_nest_skibidi_toilet = { -- Skibidi Toilet
 	text = {

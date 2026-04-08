@@ -48,6 +48,16 @@ return {
 					"at the same time"
 				}
 			},
+			j_nest_hot_dog = {
+				name = "Ghost Wolf",
+				text = {
+					"This Joker gains",
+					"{X:mult,C:white}X#1#{} Mult every time",
+					"a {C:spectral}Spectral{} card is used",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult){}"
+				}
+			},
+
 			j_nest_skibidi_toilet = {
 				name = "Skibidi Toilet",
 				text = {

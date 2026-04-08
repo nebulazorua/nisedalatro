@@ -144,7 +144,6 @@ SMODS.Joker {
 	end
 }
 
-
 -- Goated shirt
 SMODS.Joker {
 	key = "goated",
@@ -171,6 +170,51 @@ SMODS.Joker {
 	end,
 	check_for_unlock = function (self, args)
 		return args.type == 'goated'
+	end
+}
+
+-- Ghost Wolf
+SMODS.Joker {
+	key = "hot_dog",
+	blueprint_compat = true,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0
+	},
+	config = {
+		extra = {
+			xmult = 1,
+			xmult_mod = 0.75
+		}
+	},
+	rarity = 3,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	loc_vars = function (self, info_queue, card)
+		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
+	end,
+	calculate = function(self, card, context)
+	if context.using_consumeable and not context.blueprint_card then
+			if context.consumeable.ability.set == 'Spectral' then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "xmult",
+					scalar_value = "xmult_mod",
+					no_message = true
+				})
+				return {
+					message = localize("k_upgrade_ex"),
+					message_card = card,
+					colour = G.C.MULT
+				}
+			end
+		elseif context.joker_main then
+			return {
+				xmult = card.ability.extra.xmult
+			}
+		end
 	end
 }
 
@@ -288,9 +332,16 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 					message = localize("k_safe_ex")
 				}
 			end
-		-- Add the mult in main scoring context
-		elseif context.individual and context.cardarea == G.play and #get_all_diamonds(context) == #G.play.cards then
+		elseif context.before then
 			card.ability.extra.triggered = true;
+			for _, played_card in next, context.scoring_hand do
+				if not played_card:is_suit("Diamonds", true) then
+					card.ability.extra.triggered = false;
+					break;
+				end
+			end
+		elseif context.individual and context.cardarea == G.play and card.ability.extra.triggered then
+			
 			return {
 				xmult = card.ability.extra.xmult
 			}

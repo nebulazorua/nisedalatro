@@ -4,7 +4,7 @@ Nisedalatro.mod = SMODS.current_mod;
 SMODS.Rarity {
 	key = "epic",
 	badge_colour = HEX('FF00FF'),
-	default_weight = 0.005,
+	default_weight = 0.0075,
 	get_weight = function(self, weight, object_type)
 		return weight
 	end,
@@ -65,7 +65,10 @@ SMODS.Rarity {
 	key = 'horrid',
 	badge_colour = HEX '000000',
 	pools = { ["Joker"] = true },
-	default_weight = 0.005
+	default_weight = 0.0075,
+	get_weight = function(self, weight, object_type)
+		return weight
+	end,
 }
 
 
