@@ -37,7 +37,7 @@ SMODS.Consumable {
 			check_for_unlock{type = 'goated'}
 			play_sound("nest_goated_cookie")
 			G.GAME.COOKIES = (G.GAME.COOKIES or 0) * 2;
-			if G.CAME.COOKIES == 0 then
+			if G.GAME.COOKIES == 0 then
 				G.GAME.COOKIES = 1;
 			end
 			
