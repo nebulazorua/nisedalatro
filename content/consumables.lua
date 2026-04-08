@@ -36,7 +36,11 @@ SMODS.Consumable {
 		if goated then
 			check_for_unlock{type = 'goated'}
 			play_sound("nest_goated_cookie")
-			G.GAME.COOKIES = (G.GAME.COOKIES or 0) + 1;
+			G.GAME.COOKIES = (G.GAME.COOKIES or 0) * 2;
+			if G.CAME.COOKIES == 0 then
+				G.GAME.COOKIES = 1;
+			end
+			
 			for _, item in next, G.jokers.cards do
 				for k,v in pairs(item.ability) do
 					if type(v) == 'number' then
