@@ -128,8 +128,8 @@ SMODS.Joker {
 	blueprint_compat = false,
 	atlas = "jokers",
 	pos = {
-		x = 2,
-		y = 0
+		x = 0,
+		y = 2
 	},
 	rarity = 3,
 	cost = 6,
@@ -150,10 +150,10 @@ SMODS.Joker {
 	blueprint_compat = false,
 	atlas = "jokers",
 	pos = {
-		x = 2,
-		y = 0
+		x = 3,
+		y = 1
 	},
-	rarity = 2,
+	rarity = 3,
 	cost = 5,
 	unlocked = false,
 	discovered = false,
@@ -161,10 +161,22 @@ SMODS.Joker {
 		info_queue[#info_queue + 1] = G.P_CENTERS["c_nest_fortune_cookie"]
 		return {}
 	end,
+	config = {
+		immutable = {
+			failed_cookies = 0
+		}
+	},
 	calculate = function (self, card, context)
+		if context.pseudorandom_result and context.identifier == 'nest_fortune_cookie'  then
+			if context.result then
+				card.ability.immutable.failed_cookies = 0;
+			else
+				card.ability.immutable.failed_cookies = card.ability.immutable.failed_cookies + 1;
+			end
+		end
 		if context.mod_probability and not context.blueprint_card and context.identifier == 'nest_fortune_cookie' then
 			return {
-				denominator = math.max(context.denominator - 15, 1),
+				numerator = context.numerator + (2 ^ card.ability.immutable.failed_cookies);
 			}
 		end
 	end,
@@ -179,8 +191,8 @@ SMODS.Joker {
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 2,
-		y = 0
+		x = 1,
+		y = 2
 	},
 	config = {
 		extra = {
@@ -196,7 +208,7 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
 	end,
 	calculate = function(self, card, context)
-	if context.using_consumeable and not context.blueprint_card then
+		if context.using_consumeable and not context.blueprint_card then
 			if context.consumeable.ability.set == 'Spectral' then
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -300,8 +312,8 @@ SMODS.Joker { -- Creeper, cannot be bought alongside Skibidi Toilet [skibidi toi
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 4,
-		y = 0,
+		x = 0,
+		y = 1,
 	},
 	rarity = 'nest_epic',
 	cost = 10,
@@ -366,8 +378,8 @@ SMODS.Joker {
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 5,
-		y = 0,
+		x = 1,
+		y = 1,
 	},
 	rarity = 'nest_horrid',
 	cost = 10,
@@ -426,8 +438,8 @@ SMODS.Joker {
 	blueprint_compat = true,
 	atlas = "jokers",
 	pos = {
-		x = 6,
-		y = 0,
+		x = 2,
+		y = 1,
 	},
 	rarity = 'nest_horrid',
 	cost = 10,

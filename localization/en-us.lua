@@ -26,13 +26,15 @@ return {
 			j_nest_goated = {
 				name = "Goated Shirt",
 				text = {
-					"Increases the {C:green,E:1,S:1.1}probability{}",
-					"of {c:attention}Fortune Cookie{} hitting."
+					"The {C:green,E:1,S:1.1}probability{} of",
+					"{C:attention}The Fortune Cookie{} increases",
+					"with each failure.",
+					"{C:inactive}(Resets on successful use){}"
 				},
 				unlock = {
 					"Successfully be deemed",
 					"{C:attention}GOATED{}",
-					"By a Fortune Cookie"
+					"By The Fortune Cookie"
 				}
 			},
 			j_nest_recursion = {
@@ -108,7 +110,7 @@ return {
 		},
 		Tarot = {
 			c_nest_fortune_cookie = {
-				name = "Fortune Cookie",
+				name = "The Fortune Cookie",
 				text = {
 					"{C:green}#1# in #2#{} chance",
 					"to increase the values of",
