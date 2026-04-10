@@ -24,5 +24,19 @@ function SMODS.add_to_pool(prototype_obj, args)
 			end
 		end
 	end
+	if G.GAME.modifiers.nest_all_clubs and prototype_obj.key == "m_stone" then
+		return false;
+	end
+
 	return AddToPool(prototype_obj, args)
+end
+
+local CreatePlayingCard = create_playing_card;
+
+function create_playing_card(card_init, area, skip_materialize, silent, colours, skip_emplace)
+	local card = CreatePlayingCard(card_init, area, skip_materialize, silent, colours, skip_emplace)
+	if G.GAME.modifiers.nest_all_clubs then
+		card:change_suit("Clubs")
+	end
+	return card;
 end

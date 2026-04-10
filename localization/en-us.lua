@@ -121,6 +121,12 @@ return {
 		}
 	},
 	misc = {
+		challenge_names = {
+			c_nest_gargadeck = "Bid Farewell"
+		},
+		v_text = {
+			ch_c_nest_all_clubs = {"All Cards are {C:clubs}Clubs{}"},
+		},
 		dictionary = {
 			k_nest_gargamel = "Bid farewell!",
 			k_nest_kaboom = "Kaboom!",

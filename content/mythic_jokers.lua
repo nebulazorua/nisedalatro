@@ -104,10 +104,12 @@ SMODS.Joker {
 }
 
 -- Recursion creation
+-- It was way too easy to access, so I put a money cost on it too
+-- Maybe some day:tm: I'll make it a proper like, "Fuse" button, so you don't accidentally make recursion
 
 local select_blind_ref = G.FUNCS.select_blind;
 G.FUNCS.select_blind = function(e)
-	if next(find_joker("Blueprint")) and next(find_joker("Brainstorm")) then
+	if SMODS.find_card("j_blueprint") and SMODS.find_card("j_brainstorm") and G.GAME.dollars >= 50 then
 		-- Check if Blueprint is the leftmost joker and Brainstorm is to the right of Blueprint
 		local leftmost = G.jokers.cards[1];
 		local the_right = G.jokers.cards[2];
@@ -127,6 +129,8 @@ G.FUNCS.select_blind = function(e)
 					the_right.states.drag.is = true
 					the_right.children.center.pinch.x = true
 
+					ease_dollars(-50);
+					
 					G.E_MANAGER:add_event(Event({
 						trigger = 'after',
 						delay = 0.3,

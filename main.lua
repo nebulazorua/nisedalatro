@@ -71,11 +71,12 @@ SMODS.Rarity {
 	end,
 }
 
-
 load_file("misc/overrides.lua")
 load_file("content/consumables.lua")
 load_file("content/jokers.lua") 
 load_file("content/legendary_jokers.lua")
 load_file("content/mythic_jokers.lua")
+
+load_file("content/challenges.lua")
 
 load_file("compat/jokerdisplay.lua")
