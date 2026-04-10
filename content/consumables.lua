@@ -42,6 +42,9 @@ SMODS.Consumable {
 			end
 			
 			for _, item in next, G.jokers.cards do
+				-- debuff and rebuff so that we can reset things like Troubadour
+
+				item:set_debuff(true);
 				for k,v in pairs(item.ability) do
 					if type(v) == 'number' then
 						if v ~= 0 and (v ~= 1 or (k ~= 'x_chips' and k ~= 'x_mult'))then
@@ -57,6 +60,7 @@ SMODS.Consumable {
 						end
 					end
 				end
+				item:set_debuff(false);
 			end
 		else
 			G.E_MANAGER:add_event(Event({

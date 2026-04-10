@@ -63,7 +63,7 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
 	end,
 	calculate = function(self, card, context)
-		if context.destroying_card and context.destroy_card:is_suit("Clubs") and not context.retrigger_joker then
+		if context.destroying_card and context.destroy_card:is_suit("Clubs") and not context.retrigger_joker and not context.blueprint_card then
 			return {
 				remove = true
 			}
@@ -153,8 +153,8 @@ SMODS.Joker {
 		x = 3,
 		y = 1
 	},
-	rarity = 3,
-	cost = 5,
+	rarity = 'nest_epic',
+	cost = 8,
 	unlocked = false,
 	discovered = false,
 	loc_vars = function (self, info_queue, card)
@@ -176,7 +176,7 @@ SMODS.Joker {
 		end
 		if context.mod_probability and not context.blueprint_card and context.identifier == 'nest_fortune_cookie' then
 			return {
-				numerator = context.numerator + (2 ^ card.ability.immutable.failed_cookies);
+				numerator = context.numerator + ((2 ^ card.ability.immutable.failed_cookies) - 1);
 			}
 		end
 	end,

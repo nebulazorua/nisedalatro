@@ -127,3 +127,15 @@ SMODS.Joker {
 		end
 	end
 }
+
+-- Nebula
+--[[ SMODS.Joker {
+	key = "nebula",
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0
+	},
+	rarity = 4,
+
+} ]]
