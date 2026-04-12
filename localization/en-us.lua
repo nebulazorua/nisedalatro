@@ -77,7 +77,7 @@ return {
 					"{C:inactive}(Has a {C:green}#1# in #2#{C:inactive} chance to explode",
 					"{C:inactive}destroying itself and the played hand){}",
 					"{C:inactive}\"Skibidi Toilet, or Creeper?\"{}"
-				},
+				}
 			},
 			j_nest_red = {
 				name = "Red",
@@ -89,6 +89,20 @@ return {
 
 					"{C:inactive}({C:red}Consumed{C:inactive} cards will not reappear!)",
 					"{C:inactive}(Currently at {X:mult,C:white}X#2#{C:inactive}, will give {X:mult,C:white}X#1#{C:inactive})",
+				},
+				unlock = {
+					"{E:1,s:1.3}?????",
+				}
+			},
+			j_nest_nebula = {
+				name = "Nebula",
+				text = {
+					"Retriggers all cards",
+					"{C:attention}#1#{} time#2# for every {C:attention}#3#{}",
+					"levels in played {C:attention}poker hand{}"
+				},
+				unlock = {
+					"{E:1,s:1.3}?????",
 				}
 			},
 			j_nest_seven_chips = {

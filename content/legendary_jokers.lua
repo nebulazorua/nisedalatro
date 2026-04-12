@@ -7,7 +7,7 @@ SMODS.Atlas { -- TODO: actual legendaryjokers atlas and move red to aseprite
 
 function Nisedalatro.get_rarity_string(rarity)
 	local rarity_string = 'common';
-	
+
 	if rarity == 2 then
 		rarity_string = 'uncommon'
 	elseif rarity == 3 then
@@ -47,7 +47,7 @@ SMODS.Joker {
 			xmult_uncommon = 2.5,
 			xmult_rare = 5,
 			xmult_legendary = 15,
-			
+
 			-- Niseda rarities
 			xmult_nest_epic = 7.5,
 			xmult_nest_mythic = 20,
@@ -63,7 +63,7 @@ SMODS.Joker {
 			xmult_default = 2
 		}
 	},
-	loc_vars = function (self, info_queue, card)
+	loc_vars = function(self, info_queue, card)
 		local vars = {}
 		if card.area and card.area == G.jokers then
 			local my_pos = Nisedalatro.get_joker_index(card);
@@ -81,10 +81,10 @@ SMODS.Joker {
 		table.insert(vars, card.ability.extra.xmult)
 
 		return {
-			vars = vars;
+			vars = vars,
 		}
 	end,
-	calculate = function (self, card, context)
+	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and not card.getting_sliced then
 			local my_pos = Nisedalatro.get_joker_index(card);
 			local to_consume = G.jokers.cards[my_pos + 1];
@@ -122,14 +122,14 @@ SMODS.Joker {
 			end
 		elseif context.joker_main then
 			return {
-				xmult = card.ability.extra.xmult;
+				xmult = card.ability.extra.xmult,
 			}
 		end
 	end
 }
 
 -- Nebula
---[[ SMODS.Joker {
+SMODS.Joker {
 	key = "nebula",
 	atlas = "jokers",
 	pos = {
@@ -137,5 +137,42 @@ SMODS.Joker {
 		y = 0
 	},
 	rarity = 4,
+	cost = 20,
+	unlocked = false,
+	discovered = false,
+	config = {
+		extra = {
+			repetitions = 1
+		},
+		immutable = {
+			max_repetitions = 5,
+			levels = 3,
+			recent_hand = ""
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				math.min(card.ability.extra.repetitions, card.ability.immutable.max_repetitions),
+				card.ability.extra.repetitions ~= 1 and "s" or "",
+				card.ability.immutable.levels
+			}
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.repetition and context.scoring_hand then
+			local repeats = math.min(card.ability.extra.repetitions, card.ability.immutable.max_repetitions) *
+				math.floor(G.GAME.hands[context.scoring_name].level / card.ability.immutable.levels);
+			if to_number then
+				repeats = to_number(repeats);
+			end
 
-} ]]
+			if repeats > 0 then
+				return {
+					repetitions = repeats
+				}
+			end
+		end
+	end
+
+}

@@ -19,6 +19,23 @@ JokerDisplay.Definitions.j_nest_gargamel = { -- Gargamel
 	end
 }
 
+JokerDisplay.Definitions.j_nest_nebula = { -- Nebula
+	retrigger_function = function(playing_card, scoring_hand, held_in_hand, joker_card)
+		local scoring_name, _, _ = JokerDisplay.evaluate_hand()
+		if G.GAME.hands[scoring_name] then
+
+			local repeats = math.min(joker_card.ability.extra.repetitions, joker_card.ability.immutable.max_repetitions) *
+				math.floor(G.GAME.hands[scoring_name].level / joker_card.ability.immutable.levels);
+			if to_numberr then
+				repeats = to_number(repeats);
+			end
+			return repeats;
+		end
+		return 0;
+	end
+	
+}
+
 JokerDisplay.Definitions.j_nest_red = { -- Red
 	text = {
 		{

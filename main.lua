@@ -58,6 +58,17 @@ local function load_file(file)
 	end
 end
 
+--- @param choices number
+--- Modifies the amount of choices you get in booster packs.
+function Nisedalatro.modify_booster_choices(choices)
+	G.GAME.modifiers.booster_choice_mod = (G.GAME.modifiers.booster_choice_mod or 0) + choices
+end
+
+--- @param cards number
+--- Modifies the amount of CARDS you get in booster packs.
+function Nisedalatro.modify_booster_size(cards)
+	G.GAME.modifiers.booster_size_mod = (G.GAME.modifiers.booster_size_mod or 0) + cards
+end
 
 -- TODO: Make bumper cards & brap radio bumper for horrids to appear from
 -- ALSO: figure out a new name for brap radio since its stupid and we dont want that in a public release
