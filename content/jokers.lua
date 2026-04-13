@@ -450,10 +450,11 @@ SMODS.Joker {
 			mult = 17,
 			odds = 28,
 			cur_mult = 0,
-			xmult = 7,
-			
+			xmult = 7
+		},
+		immutable = {
 			sevens = 0,
-			aces = 0,
+			aces = 0
 		}
 	},
 	loc_vars = function (self, info_queue, card)
@@ -463,13 +464,13 @@ SMODS.Joker {
 	calculate = function (self, card, context)
 		if context.individual and context.cardarea == G.play and not context.blueprint_card then
 			if context.other_card:get_id() == 14 then
-				card.ability.extra.sevens = card.ability.extra.sevens + 1;
+				card.ability.immutable.sevens = card.ability.immutable.sevens + 1;
 			elseif context.other_card:get_id() == 7 then
-				card.ability.extra.aces = card.ability.extra.aces + 1;
+				card.ability.immutable.aces = card.ability.immutable.aces + 1;
 			end
-			if card.ability.extra.sevens > 0 and card.ability.extra.aces > 0 then
-				card.ability.extra.sevens = card.ability.extra.sevens - 1;
-				card.ability.extra.aces = card.ability.extra.aces - 1;
+			if card.ability.immutable.sevens > 0 and card.ability.immutable.aces > 0 then
+				card.ability.immutable.sevens = card.ability.immutable.sevens - 1;
+				card.ability.immutable.aces = card.ability.immutable.aces - 1;
 
 				if SMODS.pseudorandom_probability(card, 'nest_seventeen_mult', 1, card.ability.extra.odds) then
 					SMODS.scale_card(card, {
@@ -499,8 +500,8 @@ SMODS.Joker {
 				end
 			end
 		elseif context.joker_main then
-			card.ability.extra.aces = 0;
-			card.ability.extra.sevens = 0;
+			card.ability.immutable.aces = 0;
+			card.ability.immutable.sevens = 0;
 			return {
 				mult = card.ability.extra.cur_mult
 			}

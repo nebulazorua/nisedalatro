@@ -1,6 +1,6 @@
-SMODS.Atlas { -- TODO: actual legendaryjokers atlas and move red to aseprite
+SMODS.Atlas {
 	key = "legendaryjokers",
-	path = "RedJoker.png",
+	path = "LegendaryJokers.png",
 	px = 71,
 	py = 95
 }
@@ -26,20 +26,23 @@ SMODS.Joker {
 	blueprint_compat = true,
 	atlas = "legendaryjokers",
 	pos = {
-		x = 0,
+		x = 2,
 		y = 0,
 	},
 	soul_pos = {
-		x = 0,
-		y = 1
+		x = 3,
+		y = 0
 	},
 	rarity = 4,
 	cost = 26,
 	unlocked = false,
 	discovered = false,
 	config = {
+		immutable = {
+			personally_consumed = {}
+		},
+		
 		extra = {
-			personally_consumed = {},
 			xmult = 1,
 
 			-- Base Game
@@ -94,7 +97,7 @@ SMODS.Joker {
 				G.GAME.joker_buffer = G.GAME.joker_buffer - 1
 				local xmult_string = Nisedalatro.get_rarity_string(to_consume.config.center.rarity)
 				local xmult = card.ability.extra["xmult_" .. xmult_string] or card.ability.extra.xmult_default
-				card.ability.extra.personally_consumed[to_consume.config.center_key] = true;
+				card.ability.immutable.personally_consumed[to_consume.config.center_key] = true;
 
 				-- TODO: set gros michel to extinct when its consumed by Red
 
@@ -131,9 +134,13 @@ SMODS.Joker {
 -- Nebula
 SMODS.Joker {
 	key = "nebula",
-	atlas = "jokers",
+	atlas = "legendaryjokers",
 	pos = {
-		x = 2,
+		x = 0,
+		y = 0,
+	},
+	soul_pos = {
+		x = 1,
 		y = 0
 	},
 	rarity = 4,
@@ -174,5 +181,56 @@ SMODS.Joker {
 			end
 		end
 	end
+}
 
+SMODS.Joker {
+	key = "xavi",
+	atlas = "legendaryjokers",
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	soul_pos = {
+		x = 1,
+		y = 0
+	},
+	rarity = 4,
+	cost = 20,
+	unlocked = false,
+	discovered = false,
+	config = {
+		extra = {
+			xmult = 1,
+			xmult_mod = 0.5
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.xmult_mod,
+				card.ability.extra.xmult
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		if context.before and not context.blueprint_card then
+			if next(context.poker_hands["Two Pair"]) then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "xmult",
+					scalar_value = "xmult_mod",
+					no_message = true
+				})
+				return {
+					message = localize("k_upgrade_ex"),
+					message_card = card,
+					colour = G.C.MULT
+				}
+			end
+		elseif context.joker_main then
+			return {
+				xmult = card.ability.extra.xmult
+			}
+		end
+	end
 }

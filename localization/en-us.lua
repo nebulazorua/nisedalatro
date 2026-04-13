@@ -88,7 +88,7 @@ return {
 					"based on it's rarity.",
 
 					"{C:inactive}({C:red}Consumed{C:inactive} cards will not reappear!)",
-					"{C:inactive}(Currently at {X:mult,C:white}X#2#{C:inactive}, will give {X:mult,C:white}X#1#{C:inactive})",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive}, will give {X:mult,C:white}X#1#{C:inactive})",
 				},
 				unlock = {
 					"{E:1,s:1.3}?????",
@@ -100,6 +100,18 @@ return {
 					"Retriggers all cards",
 					"{C:attention}#1#{} time#2# for every {C:attention}#3#{}",
 					"levels in played {C:attention}poker hand{}"
+				},
+				unlock = {
+					"{E:1,s:1.3}?????",
+				}
+			},
+			j_nest_xavi = {
+				name = "xavi.",
+				text = {
+					"This Joker gains {X:mult,C:white}X#1#{} Mult",
+					"if {C:attention}poker hand{} contains a",
+					"{C:attention}Two Pair{}",
+					"{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
 				},
 				unlock = {
 					"{E:1,s:1.3}?????",

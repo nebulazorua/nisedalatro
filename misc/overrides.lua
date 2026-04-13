@@ -19,7 +19,7 @@ function SMODS.add_to_pool(prototype_obj, args)
 	local reds = SMODS.find_card("j_nest_red");
 	if #reds > 0 then
 		for _, red in next, reds do
-			if(red.ability.extra.personally_consumed[prototype_obj.key])then
+			if (red.ability.immutable.personally_consumed[prototype_obj.key]) then
 				return false;
 			end
 		end
