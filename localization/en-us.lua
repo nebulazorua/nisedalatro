@@ -50,6 +50,14 @@ return {
 					"at the same time"
 				}
 			},
+			j_nest_magnet = {
+				name = "Magnet",
+				text = {
+					"{C:attention}Gold{} and {C:attention}Steel{} cards",
+					"are drawn to your hand",
+					"before other cards."
+				}
+			},
 			j_nest_hot_dog = {
 				name = "Ghost Wolf",
 				text = {

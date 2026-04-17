@@ -51,14 +51,15 @@ SMODS.Joker {
 	config = {
 		extra = {
 			xmult = 1,
-			xmult_mod = 0.2,
+			xmult_mod = 0.2
+		},
+		immutable = {
 			played_clubs_this_hand = 0 -- for displaying funny message
 		}
 	},
 	locked_loc_vars = function(self, info_queue, card)
 		return { vars = { 10, localize("Clubs", "suits_singular") } }
 	end,
-
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
 	end,
@@ -71,7 +72,7 @@ SMODS.Joker {
 			if context.other_card:is_suit("Clubs") then
 				if (not context.other_card.ability.garga_got_this_one) then
 					context.other_card.ability.garga_got_this_one = true;
-					card.ability.extra.played_clubs_this_hand = card.ability.extra.played_clubs_this_hand + 1;
+					card.ability.immutable.played_clubs_this_hand = card.ability.immutable.played_clubs_this_hand + 1;
 				end
 
 				SMODS.scale_card(card, {
@@ -92,8 +93,8 @@ SMODS.Joker {
 			return {
 				xmult = card.ability.extra.xmult,
 				delay = 0.4,
-				func = card.ability.extra.played_clubs_this_hand > 0 and function()
-					card.ability.extra.played_clubs_this_hand = 0;
+				func = card.ability.immutable.played_clubs_this_hand > 0 and function()
+					card.ability.immutable.played_clubs_this_hand = 0;
 					if not retrigger then
 						card_eval_status_text(card, 'extra', nil, nil, nil,
 							{ message = localize("k_nest_gargamel"), sound = "nest_gargamel_trigger" })
@@ -182,6 +183,56 @@ SMODS.Joker {
 	end,
 	check_for_unlock = function (self, args)
 		return args.type == 'goated'
+	end
+}
+
+-- Magnet
+
+
+Nisedalatro.magnetic_enhancements = {"m_gold", "m_steel"}
+
+---Determines if a card should be brought to the top of the deck by Magnet
+---@param card Card
+---@return boolean
+function Nisedalatro.is_magnetic(card)
+	for _, v in next, Nisedalatro.magnetic_enhancements do
+		if(SMODS.has_enhancement(card, v))then
+			return true;
+		end
+	end
+	return false;
+end
+
+
+local function getMagnetPriority(card)
+	return Nisedalatro.is_magnetic(card) and 1 or -1
+end
+
+SMODS.Joker {
+	key = "magnet",
+	blueprint_compat = false,
+	atlas = "jokers",
+	pos = {
+		x = 2,
+		y = 0
+	},
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS["m_gold"]
+		info_queue[#info_queue + 1] = G.P_CENTERS["m_steel"]
+		return {}
+	end,
+	calculate = function (self, card, context)
+		if context.drawing_cards then
+			-- Cache the cards, so we can move all the steel/gold up
+			table.sort(G.deck.cards, function(cardA, cardB)
+				return getMagnetPriority(cardA) < getMagnetPriority(cardB);			
+			end)
+
+		end
 	end
 }
 
