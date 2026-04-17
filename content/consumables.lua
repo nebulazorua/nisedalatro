@@ -47,7 +47,7 @@ SMODS.Consumable {
 				item:set_debuff(true);
 				for k,v in pairs(item.ability) do
 					if type(v) == 'number' then
-						if v ~= 0 and (v ~= 1 or (k ~= 'x_chips' and k ~= 'x_mult'))then
+						if v ~= 0 and (v ~= 1 or (k ~= 'x_chips' and k ~= 'x_mult' and k ~= 'card_limit')) then
 							v = v * card.ability.extra.mult
 							item.ability[k] = v
 						end
